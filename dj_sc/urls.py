@@ -20,7 +20,7 @@ from main_page.views import IndexView, ResListView, start_scrap
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', IndexView.as_view()),
+    path('', IndexView.as_view(), name='index'),
     path('res/', ResListView.as_view()),
     path('start/', start_scrap),
 ]

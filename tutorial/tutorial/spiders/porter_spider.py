@@ -23,7 +23,7 @@ class PorterSpider(RedisSpider):
                 '//div[@id="product-list"]/ul[@class="products"]/li/div[@class="description"]/a/@href'
             ).extract()
             # for url in urls:
-            for url in urls[:2]:
+            for url in urls[:10]:
                 yield scrapy.Request(
                     url="https://www.net-a-porter.com" + url,
                     callback=self.parse_product
@@ -36,7 +36,7 @@ class PorterSpider(RedisSpider):
                 '//div[@class="pagination-links"]/span[@class="pagination-page-current"]/text()'
             ).extract_first()
             # if int(current_page) <= int(last_page):
-            if int(current_page) <= 2:
+            if int(current_page) <= 10:
                 base_url = response.url.split("?")[0]
                 page = base_url + "?pn={}".format(int(current_page) + 1)
                 yield response.follow(url=page, callback=self.parse)

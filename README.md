@@ -13,6 +13,8 @@ python manage.py runserver
 
 celery -A dj_sc worker -l info
 
+cd tutorial/
+
 scrapy crawl porter_scrap
 
 

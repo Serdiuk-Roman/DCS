@@ -95,3 +95,14 @@ ITEM_PIPELINES = {
     'scrapy_redis.pipelines.RedisPipeline': 300,
     'tutorial.pipelines.TutorialPipeline': 300,
 }
+
+import sys
+import os
+import django
+
+sys.path.append(os.path.join(os.path.dirname(os.path.dirname(
+    os.path.abspath(__file__))),
+    '..'))
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'dj_sc.settings'
+django.setup()

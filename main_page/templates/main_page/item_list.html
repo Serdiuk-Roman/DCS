@@ -1,0 +1,95 @@
+{% extends "main_page/base.html" %}
+
+{% block title %}List{% endblock %}
+
+{% block content %}
+
+<h1>Item List</h1>
+
+    {% if is_paginated %}
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="page-item disabled"><a class="page-link disabled" >&laquo;</a></li>
+        {% endif %}
+
+        {% for i in paginator.page_range %}
+          {% if page_obj.number == i %}
+            <li class="page-item active"><a class="page-link">{{ i }} <span class="sr-only">(current)</span></a></li>
+          {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="page-item disabled"><a class="page-link disabled" href="#">&raquo;</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% endif %}
+
+    {% if scrap_items %}
+
+    <table class="table table-striped table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>Designer</th>
+          <th>link</th>
+          <th>product_name</th>
+          <th>price</th>
+          <th>size</th>
+          <th>description</th>
+          <th>images</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in scrap_items %}
+        <tr>
+          <td>{{ item.designer_name }}</td>
+          <td><a href="{{ item.link }}">Link</a></td>
+          <td>{{ item.product_name }}</td>
+          <td>{{ item.price }} {{ item.currency }}</td>
+          <td>{{ item.size }}</td>
+          <td>{{ item.description }}</td>
+          <td>{{ item.images }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {% else %}
+      <p>There are no items in the library.</p>
+    {% endif %}
+
+    {% if is_paginated %}
+    <nav aria-label="Page navigation example">
+      <ul class="pagination pagination-lg justify-content-center">
+        {% if page_obj.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="page-item disabled"><a class="page-link disabled" >&laquo;</a></li>
+        {% endif %}
+
+        {% for i in paginator.page_range %}
+          {% if page_obj.number == i %}
+            <li class="page-item active"><a class="page-link">{{ i }} <span class="sr-only">(current)</span></a></li>
+          {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="page-item disabled"><a class="page-link disabled" href="#">&raquo;</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% endif %}
+
+{% endblock %}
+
